@@ -284,3 +284,6 @@
 #define OMV_SPI_DISPLAY_BL_PIN                (&omv_pin_A5_GPIO)
 
 #endif //__BOARD_CONFIG_H__
+
+
+
