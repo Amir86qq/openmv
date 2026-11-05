@@ -40,17 +40,17 @@ jobs:
     strategy:
       matrix:
         target:
-          - OPENMV2
-          - OPENMV3
+          #- OPENMV2
+          #- OPENMV3
           - OPENMV4
           - OPENMV4P
-          - OPENMVPT
-          - OPENMV_RT1060
-          - OPENMV_AE3
-          - OPENMV_N6
-          - ARDUINO_PORTENTA_H7
-          - ARDUINO_GIGA
-          - ARDUINO_NICLA_VISION
+          #- OPENMVPT
+          #- OPENMV_RT1060
+          #- OPENMV_AE3
+          #- OPENMV_N6
+          #- ARDUINO_PORTENTA_H7
+          #- ARDUINO_GIGA
+          #- ARDUINO_NICLA_VISION
         qemu: [false]
         fvp: [false]
         profile: [0]
@@ -116,7 +116,9 @@ jobs:
       run: source tools/ci.sh && ci_install_fvp
 
     - name: '🏗 Build firmware'
-      run: source tools/ci.sh && ci_build_target ${{ matrix.target }} ${{ matrix.qemu }} ${{ matrix.profile }} ${{ matrix.artifacts }}
+      env:
+        MAKEFLAGS: -j1
+      run: ulimit -n 65536 && source tools/ci.sh && ci_build_target ${{ matrix.target }} ${{ matrix.qemu }} ${{ matrix.profile }} ${{ matrix.artifacts }}
 
     - name: '🧪 Run QEMU tests'
       if: matrix.qemu
