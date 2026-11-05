@@ -119,7 +119,7 @@ jobs:
     - name: '🏗 Build firmware'
       env:
         MAKEFLAGS: -j1
-      run: |
+      run: 
           mkdir -p lib/micropython/ports/stm32/boards/OENMV4PM
           cp -r boards/OENMV4PM/* lib/micropython/ports/stm32/boards/OENMV4PM/ ulimit -n 65536 && source tools/ci.sh && ci_build_target ${{ matrix.target }} ${{ matrix.qemu }} ${{ matrix.profile }} ${{ matrix.artifacts }}
 
