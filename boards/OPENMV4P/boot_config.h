@@ -43,12 +43,12 @@
 
 // Boot I/O pins.
 static const pin_t omv_boot_pins[] = {
-  { .gpio = GPIOC, .pin = GPIO_PIN_1,  .speed = GPIO_SPEED_LOW,  .mode = GPIO_MODE_OUTPUT_PP, .pull = GPIO_PULLUP  }, // LED
+  { .gpio = GPIOI, .pin = GPIO_PIN_7,  .speed = GPIO_SPEED_LOW,  .mode = GPIO_MODE_OUTPUT_PP, .pull = GPIO_PULLUP  }, // LED
   { .gpio = GPIOA, .pin = GPIO_PIN_9,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_INPUT,  .pull = GPIO_NOPULL     }, // VBUS
   { .gpio = GPIOA, .pin = GPIO_PIN_11, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DM
   { .gpio = GPIOA, .pin = GPIO_PIN_12, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DP
   { .gpio = GPIOF, .pin = GPIO_PIN_10, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF9_QUADSPI  }, // CLK
-  { .gpio = GPIOG, .pin = GPIO_PIN_6,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // CS
+  { .gpio = GPIOB, .pin = GPIO_PIN_10,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // CS
   { .gpio = GPIOF, .pin = GPIO_PIN_8,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // D0
   { .gpio = GPIOF, .pin = GPIO_PIN_9,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // D1
   { .gpio = GPIOF, .pin = GPIO_PIN_7,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF9_QUADSPI  }, // D2
