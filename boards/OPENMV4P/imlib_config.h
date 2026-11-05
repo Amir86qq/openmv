@@ -95,17 +95,17 @@
 #define IMLIB_ENABLE_QRCODES
 
 // Enable find_apriltags() (64 KB)
-#define IMLIB_ENABLE_APRILTAGS
-#define IMLIB_ENABLE_APRILTAGS_TAG36H11
+//#define IMLIB_ENABLE_APRILTAGS
+//#define IMLIB_ENABLE_APRILTAGS_TAG36H11
 
 // Enable fine find_apriltags() - (8-way connectivity versus 4-way connectivity)
 // #define IMLIB_ENABLE_FINE_APRILTAGS
 
 // Enable high res find_apriltags() - uses more RAM
-#define IMLIB_ENABLE_HIGH_RES_APRILTAGS
+//#define IMLIB_ENABLE_HIGH_RES_APRILTAGS
 
 // Enable find_datamatrices() (26 KB)
-#define IMLIB_ENABLE_DATAMATRICES
+//#define IMLIB_ENABLE_DATAMATRICES
 
 // Enable find_barcodes() (42 KB)
 #define IMLIB_ENABLE_BARCODES
