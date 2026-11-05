@@ -1,0 +1,27 @@
+# OpenMV library
+add_library("openmv-lib", "$(OMV_LIB_DIR)")
+
+# Drivers
+require("onewire")
+require("ds18x20")
+require("dht")
+require("neopixel")
+freeze ("$(OMV_LIB_DIR)/", "pid.py")
+freeze ("$(OMV_LIB_DIR)/", "ssd1306.py")
+freeze ("$(OMV_LIB_DIR)/", "tb6612.py")
+freeze ("$(OMV_LIB_DIR)/", "machine.py")
+freeze ("$(OMV_LIB_DIR)/", "display.py")
+freeze ("$(OMV_LIB_DIR)/", "sensor.py")
+
+
+# Utils
+require("time")
+require("logging")
+freeze ("$(OMV_LIB_DIR)/", "mutex.py")
+
+# Libraries
+require("ml", library="openmv-lib")
+include("$(MPY_DIR)/extmod/asyncio")
+
+# Boot script
+freeze ("$(OMV_LIB_DIR)/", "_boot.py")

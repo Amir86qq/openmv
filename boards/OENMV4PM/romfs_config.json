@@ -1,0 +1,14 @@
+{
+  "0": {
+    "size": "0x800000",
+    "entries": [
+    
+    {
+      "type": "tflite",
+      "path": "{TOP}/lib/models/yolo_lc_192.tflite",
+      "alignment": 16,
+      "optimize": "Performance"
+    }
+    ]
+  }
+}
