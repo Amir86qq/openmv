@@ -44,7 +44,7 @@ jobs:
           #- OPENMV3
           - OPENMV4
           - OPENMV4P
-          - OPENMV4PM
+          - OENMV4PM
           #- OPENMVPT
           #- OPENMV_RT1060
           #- OPENMV_AE3
