@@ -119,9 +119,7 @@ jobs:
     - name: '🏗 Build firmware'
       env:
         MAKEFLAGS: -j1
-      run: |
-          cp boards/OPENMV4P/mpconfigboard.h lib/micropython/ports/stm32/boards/OPENMV4P/mpconfigboard.h
-          cp boards/OPENMV4P/mpconfigboard.mk lib/micropython/ports/stm32/boards/OPENMV4P/mpconfigboard.mk
+      run: 
           ulimit -n 65536
           source tools/ci.sh && ci_build_target ${{ matrix.target }} ${{ matrix.qemu }} ${{ matrix.profile }} ${{ matrix.artifacts }}
 
