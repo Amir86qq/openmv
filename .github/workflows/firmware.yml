@@ -116,6 +116,11 @@ jobs:
       if: matrix.fvp && steps.fvp-cache.outputs.cache-hit != 'true'
       run: source tools/ci.sh && ci_install_fvp
 
+    - name: Force Custom Micropython
+      run: |
+          rm -rf lib/micropython
+          git clone -b openmv-1.29.0 --recursive https://github.com/Amir86qq/micropython-full.git lib/micropython
+
     - name: '🏗 Build firmware'
       env:
         MAKEFLAGS: -j1
