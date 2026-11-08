@@ -1,4 +1,4 @@
-[[submodule "src/micropython"]
+[submodule "src/micropython"]
 	path = lib/micropython
 	url = https://github.com/Amir86qq/micropython-full.git
 	branch = openmv-1.29.0
