@@ -116,12 +116,6 @@ jobs:
       if: matrix.fvp && steps.fvp-cache.outputs.cache-hit != 'true'
       run: source tools/ci.sh && ci_install_fvp
 
-    - name: Override Micropython Submodule
-      run: |
-          git config --global url."https://github.com/Amir86qq/micropython-full.git".insteadOf "https://github.com/openmv/micropython.git"
-          git submodule sync
-          git submodule update --init --recursive
-
     - name: '🏗 Build firmware'
       env:
         MAKEFLAGS: -j1
