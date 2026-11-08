@@ -221,8 +221,8 @@
 
 #define OMV_CSI_D0_PIN                        (&omv_pin_C6_DCMI)
 #define OMV_CSI_D1_PIN                        (&omv_pin_C7_DCMI)
-#define OMV_CSI_D2_PIN                        (&omv_pin_G10_DCMI)
-#define OMV_CSI_D3_PIN                        (&omv_pin_G11_DCMI)
+#define OMV_CSI_D2_PIN                        (&omv_pin_C8_DCMI)
+#define OMV_CSI_D3_PIN                        (&omv_pin_C9_DCMI)
 #define OMV_CSI_D4_PIN                        (&omv_pin_E4_DCMI)
 #define OMV_CSI_D5_PIN                        (&omv_pin_B6_DCMI)
 #define OMV_CSI_D6_PIN                        (&omv_pin_E5_DCMI)
