@@ -29,6 +29,7 @@
 #include STM32_HAL_H
 #include "port.h"
 
+
 // Misc config.
 #define OMV_BOOT_VID                (0x37C5)
 #define OMV_BOOT_PID                (0x9204)
