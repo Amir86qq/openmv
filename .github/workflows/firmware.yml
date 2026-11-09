@@ -114,6 +114,9 @@ jobs:
     - name: '🛠 Install FVP'
       if: matrix.fvp && steps.fvp-cache.outputs.cache-hit != 'true'
       run: source tools/ci.sh && ci_install_fvp
+           
+    - name: Update Micropython to Latest
+      run: git submodule update --remote --recursive lib/micropython
 
     - name: '🏗 Build firmware'
       run: source tools/ci.sh && ci_build_target ${{ matrix.target }} ${{ matrix.qemu }} ${{ matrix.profile }} ${{ matrix.artifacts }}
