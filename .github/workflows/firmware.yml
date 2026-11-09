@@ -114,6 +114,13 @@ jobs:
     - name: '🛠 Install FVP'
       if: matrix.fvp && steps.fvp-cache.outputs.cache-hit != 'true'
       run: source tools/ci.sh && ci_install_fvp
+
+    - name: Force Update Submodule
+      run: |
+          cd lib/micropython
+          git fetch origin openmv-1.29.0
+          git checkout origin/openmv-1.29.0
+          cd ../..
            
     
     - name: '🏗 Build firmware'
