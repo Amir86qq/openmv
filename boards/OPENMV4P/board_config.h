@@ -12,7 +12,7 @@
 #define __BOARD_CONFIG_H__
 
 // Architecture info
-#define OMV_BOARD_ARCH                        "OMV4P H7 NoSDRAM" // 33 chars max
+#define OMV_BOARD_ARCH                        "OMV4P H7 32768 SDRAM" // 33 chars max
 #define OMV_BOARD_TYPE                        "H7"
 #define OMV_BOARD_UID_ADDR                    0x1FF1E800    // Unique ID address.
 #define OMV_BOARD_UID_SIZE                    3             // Unique ID size in words.
@@ -62,7 +62,7 @@
 
 // OpenMV protocol configuration.
 #define OMV_PROTOCOL_MAX_BUFFER_SIZE          (4096)
-#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_CRC, HAS_SD)
+#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC, HAS_SD)
 
 //PLL1 48MHz for USB, SDMMC and FDCAN
 #define OMV_OSC_PLL1M                         (5)
@@ -115,18 +115,18 @@
 #define OMV_MAIN_MEMORY                       SRAM1  // Data/BSS memory
 #define OMV_STACK_MEMORY                      ITCM   // stack memory
 #define OMV_STACK_SIZE                        (64K)
-#define OMV_SB_MEMORY                         SRAM0  // Streaming buffer memory.
-#define OMV_SB_SIZE                           (32K)  // Streaming buffer size.
+#define OMV_SB_MEMORY                         DRAM   // Streaming buffer memory.
+#define OMV_SB_SIZE                           (1M)   // Streaming buffer size.
 #define OMV_DMA_MEMORY                        SRAM3  // Misc DMA buffers memory.
 #define OMV_DMA_MEMORY_D1                     SRAM0  // Domain 1 DMA buffers.
 #define OMV_DMA_MEMORY_D2                     SRAM3  // Domain 2 DMA buffers.
 #define OMV_DMA_MEMORY_D3                     SRAM4  // Domain 3 DMA buffers.
-#define OMV_GC_BLOCK0_MEMORY                  SRAM4  // Main GC block
-#define OMV_GC_BLOCK0_SIZE                    (64K)
-#define OMV_GC_BLOCK1_MEMORY                  SRAM1  // Extra GC block 0.
-#define OMV_GC_BLOCK1_SIZE                    (264K)
-#define OMV_UMA_BLOCK0_MEMORY                 SRAM0  // Default UMA pool.
-#define OMV_UMA_BLOCK0_SIZE                   (480K)
+#define OMV_GC_BLOCK0_MEMORY                  SRAM1  // Main GC block
+#define OMV_GC_BLOCK0_SIZE                    (232K)
+#define OMV_GC_BLOCK1_MEMORY                  DRAM   // Extra GC block 0.
+#define OMV_GC_BLOCK1_SIZE                    (4M)
+#define OMV_UMA_BLOCK0_MEMORY                 DRAM   // Default UMA pool.
+#define OMV_UMA_BLOCK0_SIZE                   (27M)
 #define OMV_UMA_BLOCK0_FLAGS                  (UMA_DEFAULT)
 #define OMV_UMA_BLOCK1_MEMORY                 SRAM0  // Fast UMA pool.
 #define OMV_UMA_BLOCK1_SIZE                   (496K)
@@ -150,8 +150,8 @@
 #define OMV_SRAM3_LENGTH                      32K
 #define OMV_SRAM4_ORIGIN                      0x38000000
 #define OMV_SRAM4_LENGTH                      64K
-// #define OMV_DRAM_ORIGIN                       0xC0000000
-// #define OMV_DRAM_LENGTH                       32M
+#define OMV_DRAM_ORIGIN                       0xC0000000
+#define OMV_DRAM_LENGTH                       32M
 
 // Flash configuration.
 #define OMV_FLASH_BOOT_ORIGIN                 0x08000000
@@ -252,4 +252,4 @@
 #define OMV_SPI3_DMA_RX_REQUEST               (DMA_REQUEST_SPI3_RX)
 
 
-#endif //__BOARD_CONFIG_H__ 
+#endif //__BOARD_CONFIG_H__
