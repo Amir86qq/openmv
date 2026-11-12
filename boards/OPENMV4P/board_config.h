@@ -76,7 +76,7 @@
 
 // PLL2 200MHz for FMC and QSPI.
 #define OMV_OSC_PLL2M                         (5)
-#define OMV_OSC_PLL2N                         (80)
+#define OMV_OSC_PLL2N                         (60)
 #define OMV_OSC_PLL2P                         (2)
 #define OMV_OSC_PLL2Q                         (2)
 #define OMV_OSC_PLL2R                         (2)
