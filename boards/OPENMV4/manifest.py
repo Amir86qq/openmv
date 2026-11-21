@@ -17,13 +17,15 @@ freeze ("$(OMV_LIB_DIR)/", "display.py")
 freeze ("$(OMV_LIB_DIR)/", "sensor.py")
 
 # Networking
-require("ssl")
-require("ntptime")
-require("webrepl")
-freeze ("$(OMV_LIB_DIR)/", "rpc.py")
-freeze ("$(OMV_LIB_DIR)/", "rtsp.py")
-freeze ("$(OMV_LIB_DIR)/", "mqtt.py")
-freeze ("$(OMV_LIB_DIR)/", "requests.py")
+# NOTE: Disabled on this board — no WINC1500/LWIP hardware.
+# Uncomment if WiFi hardware is added and MICROPY_PY_WINC1500=1 / LWIP=1.
+#require("ssl")
+#require("ntptime")
+#require("webrepl")
+#freeze ("$(OMV_LIB_DIR)/", "rpc.py")
+#freeze ("$(OMV_LIB_DIR)/", "rtsp.py")
+#freeze ("$(OMV_LIB_DIR)/", "mqtt.py")
+#freeze ("$(OMV_LIB_DIR)/", "requests.py")
 
 # Utils
 require("time")
