@@ -31,15 +31,13 @@
 
 // Misc config.
 #define OMV_BOOT_VID                (0x37C5)
-#define OMV_BOOT_PID                (0x924A)
+#define OMV_BOOT_PID                (0x9204)
 #define OMV_BOOT_DFU_TIMEOUT        (1500)
 #define OMV_BOOT_LED_PIN            (0) // index in omv_boot_pins
 #define OMV_BOOT_MAGIC_ADDR         (0x2001FFFCU)
 
 // Flash config.
 #define OMV_BOOT_AXI_FLASH_ENABLE   (1)
-#define OMV_BOOT_SPI_FLASH_ENABLE   (1)
-#define OMV_BOOT_QSPI_FLASH_SIZE    (0x2000000)  // Must always be a power of 2.
 
 // Boot I/O pins.
 static const pin_t omv_boot_pins[] = {
@@ -47,12 +45,6 @@ static const pin_t omv_boot_pins[] = {
   { .gpio = GPIOA, .pin = GPIO_PIN_9,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_INPUT,  .pull = GPIO_NOPULL     }, // VBUS
   { .gpio = GPIOA, .pin = GPIO_PIN_11, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DM
   { .gpio = GPIOA, .pin = GPIO_PIN_12, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DP
-  { .gpio = GPIOF, .pin = GPIO_PIN_10, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF9_QUADSPI  }, // CLK
-  { .gpio = GPIOB, .pin = GPIO_PIN_10,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // CS
-  { .gpio = GPIOF, .pin = GPIO_PIN_8,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // D0
-  { .gpio = GPIOF, .pin = GPIO_PIN_9,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_QUADSPI }, // D1
-  { .gpio = GPIOF, .pin = GPIO_PIN_7,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF9_QUADSPI  }, // D2
-  { .gpio = GPIOF, .pin = GPIO_PIN_6,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF9_QUADSPI  }, // D3
 };
 #define OMV_BOOT_PINS_COUNT         (sizeof(omv_boot_pins) / sizeof(omv_boot_pins[0]))
 
@@ -60,10 +52,9 @@ static const pin_t omv_boot_pins[] = {
 static const partition_t OMV_BOOT_DFU_PARTITIONS[] = {
   { .type = PTYPE_AXI_FLASH, .region =  -1, .rdonly = 1, .start = 0x08000000, .limit = 0x08020000, .attr = 0 }, // Boot
   { .type = PTYPE_AXI_FLASH, .region =  -1, .rdonly = 0, .start = 0x08020000, .limit = 0x08040000, .attr = 0 }, // FFS
-  { .type = PTYPE_AXI_FLASH, .region =  -1, .rdonly = 0, .start = 0x08040000, .limit = 0x08200000, .attr = 0 }, // FIRMWARE
-  { .type = PTYPE_SPI_FLASH, .region =  -1, .rdonly = 0, .start = 0x00000000, .limit = 0x02000000, .attr = 0 }, // QSPI
-  { .type = PTYPE_SPI_FLASH, .region =  -1, .rdonly = 0, .start = 0x01800000, .limit = 0x02000000, .attr = 0 }, // ROMFS
+  { .type = PTYPE_AXI_FLASH, .region =  -1, .rdonly = 0, .start = 0x08040000, .limit = 0x081E0000, .attr = 0 }, // FIRMWARE
+  { .type = PTYPE_AXI_FLASH, .region =  -1, .rdonly = 0, .start = 0x081E0000, .limit = 0x08200000, .attr = 0 }, // ROMFS
 };
-#define OMV_BOOT_DFU_PARTITIONS_COUNT   5 // Must be a literal
-#define OMV_BOOT_DFU_PARTITIONS_STR     "BOOTLOADER", "FILESYSTEM", "FIRMWARE", "SPI_FLASH", "ROMFS0"
+#define OMV_BOOT_DFU_PARTITIONS_COUNT   4 // Must be a literal
+#define OMV_BOOT_DFU_PARTITIONS_STR     "BOOTLOADER", "FILESYSTEM", "FIRMWARE", "ROMFS0"
 #endif //__BOOT_CONFIG_H__
