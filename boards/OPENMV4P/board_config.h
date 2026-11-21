@@ -1,8 +1,8 @@
 /*
- * This file is part of the OpenMV project.  
+ * This file is part of the OpenMV project.
  *
  * Copyright (c) 2013-2024 Ibrahim Abdelkader <iabdalkader@openmv.io>
- * Copyright (c) 2013-2024 Kwabena W. Agyeman <kwagyeman@openmv.io> 
+ * Copyright (c) 2013-2024 Kwabena W. Agyeman <kwagyeman@openmv.io>
  *
  * This work is licensed under the MIT license, see the file LICENSE for details.
  *
@@ -12,7 +12,7 @@
 #define __BOARD_CONFIG_H__
 
 // Architecture info
-#define OMV_BOARD_ARCH                        "OMV4P H7 32768 SDRAM" // 33 chars max
+#define OMV_BOARD_ARCH                        "OMV4 H7 1024" // 33 chars max
 #define OMV_BOARD_TYPE                        "H7"
 #define OMV_BOARD_UID_ADDR                    0x1FF1E800    // Unique ID address.
 #define OMV_BOARD_UID_SIZE                    3             // Unique ID size in words.
@@ -22,7 +22,7 @@
 #define OMV_JPEG_CODEC_ENABLE                 (1)
 #define OMV_JPEG_QUALITY_LOW                  (50)
 #define OMV_JPEG_QUALITY_HIGH                 (90)
-#define OMV_JPEG_QUALITY_THRESHOLD            (1920 * 1080 * 2)
+#define OMV_JPEG_QUALITY_THRESHOLD            (320 * 240 * 2)
 
 // GPU Configuration
 #define OMV_GPU_ENABLE                        (1)
@@ -56,15 +56,15 @@
 #define OMV_FIR_MLX90641_ENABLE               (0)
 #define OMV_FIR_AMG8833_ENABLE                (0)
 
-
 // USB IRQn.
 #define OMV_USB_IRQN                          (OTG_FS_IRQn)
 
 // OpenMV protocol configuration.
-#define OMV_PROTOCOL_MAX_BUFFER_SIZE          (4096)
-#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC, HAS_SD)
+#define OMV_PROTOCOL_MAX_BUFFER_SIZE          (512)
+#define OMV_PROTOCOL_STDIO_BUFFER_SIZE        (512)
+#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_CRC, HAS_SD)
 
-//PLL1 48MHz for USB, SDMMC and FDCAN
+// PLL1 480MHz/48MHz for USB, SDMMC and FDCAN
 #define OMV_OSC_PLL1M                         (5)
 #define OMV_OSC_PLL1N                         (192)
 #define OMV_OSC_PLL1P                         (2)
@@ -74,9 +74,9 @@
 #define OMV_OSC_PLL1VCO                       (RCC_PLL1VCOWIDE)
 #define OMV_OSC_PLL1FRAC                      (0)
 
-// PLL2 200MHz for FMC and QSPI.
+// PLL2 - Reserved (SDRAM/FMC and QSPI are not used on this board).
 #define OMV_OSC_PLL2M                         (5)
-#define OMV_OSC_PLL2N                         (60)
+#define OMV_OSC_PLL2N                         (80)
 #define OMV_OSC_PLL2P                         (2)
 #define OMV_OSC_PLL2Q                         (2)
 #define OMV_OSC_PLL2R                         (2)
@@ -112,27 +112,22 @@
 #define OMV_PWR_SUPPLY                        (PWR_LDO_SUPPLY)
 
 // Linker script constants (see the linker script template stm32.ld.S).
-#define OMV_MAIN_MEMORY                       SRAM1  // Data/BSS memory
-#define OMV_STACK_MEMORY                      ITCM   // stack memory
+#define OMV_MAIN_MEMORY                       SRAM1 // Data/BSS memory
+#define OMV_FFS_MEMORY                        DTCM  // Flash filesystem cache memory
+#define OMV_STACK_MEMORY                      ITCM  // stack memory
 #define OMV_STACK_SIZE                        (64K)
-#define OMV_SB_MEMORY                         DRAM   // Streaming buffer memory.
-#define OMV_SB_SIZE                           (1M)   // Streaming buffer size.
-#define OMV_DMA_MEMORY                        SRAM3  // Misc DMA buffers memory.
-#define OMV_DMA_MEMORY_D1                     SRAM0  // Domain 1 DMA buffers.
-#define OMV_DMA_MEMORY_D2                     SRAM3  // Domain 2 DMA buffers.
-#define OMV_DMA_MEMORY_D3                     SRAM4  // Domain 3 DMA buffers.
-#define OMV_GC_BLOCK0_MEMORY                  SRAM1  // Main GC block
-#define OMV_GC_BLOCK0_SIZE                    (232K)
-#define OMV_GC_BLOCK1_MEMORY                  DRAM   // Extra GC block 0.
-#define OMV_GC_BLOCK1_SIZE                    (4M)
-#define OMV_UMA_BLOCK0_MEMORY                 DRAM   // Default UMA pool.
-#define OMV_UMA_BLOCK0_SIZE                   (27M)
+#define OMV_SB_MEMORY                         SRAM0 // Streaming buffer memory.
+#define OMV_SB_SIZE                           (32K) // Streaming buffer size.
+#define OMV_DMA_MEMORY                        SRAM2 // Misc DMA buffers memory.
+#define OMV_GC_BLOCK0_MEMORY                  SRAM4 // Main GC block.
+#define OMV_GC_BLOCK0_SIZE                    (64K)
+#define OMV_GC_BLOCK1_MEMORY                  SRAM1 // Extra GC block 0.
+#define OMV_GC_BLOCK1_SIZE                    (264K)
+#define OMV_UMA_BLOCK0_MEMORY                 SRAM0 // Default UMA pool.
+#define OMV_UMA_BLOCK0_SIZE                   (480K)
 #define OMV_UMA_BLOCK0_FLAGS                  (UMA_DEFAULT)
-#define OMV_UMA_BLOCK1_MEMORY                 SRAM0  // Fast UMA pool.
-#define OMV_UMA_BLOCK1_SIZE                   (496K)
-#define OMV_UMA_BLOCK1_FLAGS                  (UMA_FAST | UMA_DTCM)
-#define OMV_MSC_BUF_SIZE                      (2K)   // USB MSC bot data
-#define OMV_LINE_BUF_SIZE                     (11 * 1024) // Image line buffer round(2592 * 2BPP * 2 buffers).
+#define OMV_MSC_BUF_SIZE                      (2K)  // USB MSC bot data
+#define OMV_LINE_BUF_SIZE                     (3 * 1024) // Image line buffer round(640 * 2BPP * 2 buffers).
 #define OMV_VOSPI_DMA_BUFFER                  ".dma_buffer"
 
 // Memory map.
@@ -145,13 +140,11 @@
 #define OMV_SRAM0_ORIGIN                      0x24000000
 #define OMV_SRAM0_LENGTH                      512K
 #define OMV_SRAM1_ORIGIN                      0x30000000
-#define OMV_SRAM1_LENGTH                      256K // SRAM1 + SRAM2 + 1/2 SRAM3
-#define OMV_SRAM3_ORIGIN                      0x30040000
-#define OMV_SRAM3_LENGTH                      32K
+#define OMV_SRAM1_LENGTH                      280K // SRAM1 + SRAM2 + upper 24K of SRAM3
+#define OMV_SRAM2_ORIGIN                      0x30046000
+#define OMV_SRAM2_LENGTH                      8K   // Last 8K of SRAM3 (DMA)
 #define OMV_SRAM4_ORIGIN                      0x38000000
 #define OMV_SRAM4_LENGTH                      64K
-#define OMV_DRAM_ORIGIN                       0xC0000000
-#define OMV_DRAM_LENGTH                       32M
 
 // Flash configuration.
 #define OMV_FLASH_BOOT_ORIGIN                 0x08000000
@@ -159,11 +152,11 @@
 #define OMV_FLASH_FFS_ORIGIN                  0x08020000
 #define OMV_FLASH_FFS_LENGTH                  128K
 #define OMV_FLASH_TXT_ORIGIN                  0x08040000
-#define OMV_FLASH_TXT_LENGTH                  1792K
+#define OMV_FLASH_TXT_LENGTH                  1664K
 
-// ROMFS configuration.
-#define OMV_ROMFS_PART0_ORIGIN                0x91800000
-#define OMV_ROMFS_PART0_LENGTH                8M
+// ROMFS configuration (placed in internal flash after firmware).
+#define OMV_ROMFS_PART0_ORIGIN                0x081E0000
+#define OMV_ROMFS_PART0_LENGTH                128K
 
 // MDMA configuration
 #define OMV_MDMA_CHANNEL_DCMI_0               (0)
@@ -186,7 +179,6 @@
 #define OMV_GPIO_PORT_H_ENABLE                (1)
 #define OMV_GPIO_PORT_I_ENABLE                (1)
 
-
 // CSI I2C bus
 #define OMV_CSI_I2C_ID                        (1)
 #define OMV_CSI_I2C_SPEED                     (OMV_I2C_SPEED_STANDARD)
@@ -194,7 +186,6 @@
 // FIR I2C bus
 #define OMV_FIR_I2C_ID                        (2)
 #define OMV_FIR_I2C_SPEED                     (OMV_I2C_SPEED_FULL)
-
 
 // Camera Interface
 #define OMV_CSI_CLK_SOURCE                    (OMV_CSI_CLK_SOURCE_TIM)
@@ -245,11 +236,10 @@
 #define OMV_SPI3_SCLK_PIN                     (&omv_pin_B3_SPI3)
 #define OMV_SPI3_MISO_PIN                     (&omv_pin_B4_SPI3)
 #define OMV_SPI3_MOSI_PIN                     (&omv_pin_B5_SPI3)
-#define OMV_SPI3_SSEL_PIN                     (&omv_pin_I2_GPIO) // CS1 روی PI2
+#define OMV_SPI3_SSEL_PIN                     (&omv_pin_I2_GPIO)
 #define OMV_SPI3_DMA_TX_CHANNEL               (DMA1_Stream7)
 #define OMV_SPI3_DMA_TX_REQUEST               (DMA_REQUEST_SPI3_TX)
 #define OMV_SPI3_DMA_RX_CHANNEL               (DMA1_Stream2)
 #define OMV_SPI3_DMA_RX_REQUEST               (DMA_REQUEST_SPI3_RX)
-
 
 #endif //__BOARD_CONFIG_H__
