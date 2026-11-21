@@ -27,7 +27,7 @@
 #define __BOARD_CONFIG_H__
 
 // Architecture info
-#define OMV_BOARD_ARCH                        "OMV4 H7 1024" // 33 chars max
+#define OMV_BOARD_ARCH                        "OMV4 H7 II 1024" // 33 chars max
 #define OMV_BOARD_TYPE                        "H7"
 #define OMV_BOARD_UID_ADDR                    0x1FF1E800    // Unique ID address.
 #define OMV_BOARD_UID_SIZE                    3             // Unique ID size in words.
@@ -70,7 +70,6 @@
 #define OMV_FIR_MLX90641_ENABLE               (1)
 #define OMV_FIR_AMG8833_ENABLE                (1)
 
-
 // USB IRQn.
 #define OMV_USB_IRQN                          (OTG_FS_IRQn)
 
@@ -79,9 +78,9 @@
 #define OMV_PROTOCOL_STDIO_BUFFER_SIZE        (512)
 #define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_CRC, HAS_SD)
 
-//PLL1 480MHz/48MHz for USB, SDMMC and FDCAN
-#define OMV_OSC_PLL1M                         (3)
-#define OMV_OSC_PLL1N                         (240)
+// PLL1 480MHz/48MHz for USB, SDMMC and FDCAN  (HSE = 25MHz)
+#define OMV_OSC_PLL1M                         (5)
+#define OMV_OSC_PLL1N                         (192)
 #define OMV_OSC_PLL1P                         (2)
 #define OMV_OSC_PLL1Q                         (20)
 #define OMV_OSC_PLL1R                         (2)
@@ -89,9 +88,9 @@
 #define OMV_OSC_PLL1VCO                       (RCC_PLL1VCOWIDE)
 #define OMV_OSC_PLL1FRAC                      (0)
 
-// PLL2 200MHz for FMC and QSPI.
-#define OMV_OSC_PLL2M                         (3)
-#define OMV_OSC_PLL2N                         (100)
+// PLL2 200MHz for FMC and QSPI  (HSE = 25MHz)
+#define OMV_OSC_PLL2M                         (5)
+#define OMV_OSC_PLL2N                         (60)
 #define OMV_OSC_PLL2P                         (2)
 #define OMV_OSC_PLL2Q                         (2)
 #define OMV_OSC_PLL2R                         (2)
@@ -99,9 +98,9 @@
 #define OMV_OSC_PLL2VCO                       (RCC_PLL2VCOWIDE)
 #define OMV_OSC_PLL2FRAC                      (0)
 
-// PLL3 160MHz for ADC and SPI123
-#define OMV_OSC_PLL3M                         (3)
-#define OMV_OSC_PLL3N                         (80)
+// PLL3 160MHz for ADC and SPI123  (HSE = 25MHz)
+#define OMV_OSC_PLL3M                         (5)
+#define OMV_OSC_PLL3N                         (64)
 #define OMV_OSC_PLL3P                         (2)
 #define OMV_OSC_PLL3Q                         (2)
 #define OMV_OSC_PLL3R                         (2)
@@ -183,6 +182,17 @@
 #define OMV_AXI_QOS_MDMA_R_PRI                15 // Max pri to move data.
 #define OMV_AXI_QOS_MDMA_W_PRI                15 // Max pri to move data.
 
+// Enable additional GPIO ports (176-pin package uses ports A..I).
+#define OMV_GPIO_PORT_A_ENABLE                (1)
+#define OMV_GPIO_PORT_B_ENABLE                (1)
+#define OMV_GPIO_PORT_C_ENABLE                (1)
+#define OMV_GPIO_PORT_D_ENABLE                (1)
+#define OMV_GPIO_PORT_E_ENABLE                (1)
+#define OMV_GPIO_PORT_F_ENABLE                (1)
+#define OMV_GPIO_PORT_G_ENABLE                (1)
+#define OMV_GPIO_PORT_H_ENABLE                (1)
+#define OMV_GPIO_PORT_I_ENABLE                (1)
+
 // CSI I2C bus
 #define OMV_CSI_I2C_ID                        (1)
 #define OMV_CSI_I2C_SPEED                     (OMV_I2C_SPEED_STANDARD)
@@ -190,21 +200,6 @@
 // FIR I2C bus
 #define OMV_FIR_I2C_ID                        (2)
 #define OMV_FIR_I2C_SPEED                     (OMV_I2C_SPEED_FULL)
-
-// Soft I2C bus
-#define OMV_SOFT_I2C_SIOC_PIN                 (&omv_pin_B10_GPIO)
-#define OMV_SOFT_I2C_SIOD_PIN                 (&omv_pin_B11_GPIO)
-#define OMV_SOFT_I2C_SPIN_DELAY               64
-
-// CSI SPI bus
-#define OMV_CSI_SPI_ID                        (3)
-
-// WINC1500 WiFi module SPI bus
-#define OMV_WINC_SPI_ID                       (2)
-#define OMV_WINC_SPI_BAUDRATE                 (40000000)
-#define OMV_WINC_EN_PIN                       (&omv_pin_A5_GPIO)
-#define OMV_WINC_RST_PIN                      (&omv_pin_D12_GPIO)
-#define OMV_WINC_IRQ_PIN                      (&omv_pin_D13_GPIO)
 
 // Camera Interface
 #define OMV_CSI_CLK_SOURCE                    (OMV_CSI_CLK_SOURCE_TIM)
@@ -223,64 +218,42 @@
 
 #define OMV_CSI_D0_PIN                        (&omv_pin_C6_DCMI)
 #define OMV_CSI_D1_PIN                        (&omv_pin_C7_DCMI)
-#define OMV_CSI_D2_PIN                        (&omv_pin_E0_DCMI)
-#define OMV_CSI_D3_PIN                        (&omv_pin_E1_DCMI)
+#define OMV_CSI_D2_PIN                        (&omv_pin_C8_DCMI)
+#define OMV_CSI_D3_PIN                        (&omv_pin_C9_DCMI)
 #define OMV_CSI_D4_PIN                        (&omv_pin_E4_DCMI)
-#define OMV_CSI_D5_PIN                        (&omv_pin_B6_DCMI)
+#define OMV_CSI_D5_PIN                        (&omv_pin_D3_DCMI)
 #define OMV_CSI_D6_PIN                        (&omv_pin_E5_DCMI)
 #define OMV_CSI_D7_PIN                        (&omv_pin_E6_DCMI)
 
 #define OMV_CSI_HSYNC_PIN                     (&omv_pin_A4_DCMI)
-#define OMV_CSI_VSYNC_PIN                     (&omv_pin_B7_DCMI)
+#define OMV_CSI_VSYNC_PIN                     (&omv_pin_G9_DCMI)
 #define OMV_CSI_PXCLK_PIN                     (&omv_pin_A6_DCMI)
-#define OMV_CSI_RESET_PIN                     (&omv_pin_A10_GPIO)
-#define OMV_CSI_POWER_PIN                     (&omv_pin_D7_GPIO)
+#define OMV_CSI_RESET_PIN                     (&omv_pin_E2_GPIO)
+#define OMV_CSI_POWER_PIN                     (&omv_pin_E3_GPIO)
 
 // Physical I2C buses.
 
 // I2C bus 1
 #define OMV_I2C1_ID                           (1)
-#define OMV_I2C1_SCL_PIN                      (&omv_pin_B8_I2C1)
-#define OMV_I2C1_SDA_PIN                      (&omv_pin_B9_I2C1)
+#define OMV_I2C1_SCL_PIN                      (&omv_pin_B6_I2C1)
+#define OMV_I2C1_SDA_PIN                      (&omv_pin_B7_I2C1)
 
 // I2C bus 2
 #define OMV_I2C2_ID                           (2)
-#define OMV_I2C2_SCL_PIN                      (&omv_pin_B10_I2C2)
-#define OMV_I2C2_SDA_PIN                      (&omv_pin_B11_I2C2)
+#define OMV_I2C2_SCL_PIN                      (&omv_pin_H4_I2C2)
+#define OMV_I2C2_SDA_PIN                      (&omv_pin_H5_I2C2)
 
 // Physical SPI buses.
-
-// SPI bus 2
-#define OMV_SPI2_ID                           (2)
-#define OMV_SPI2_SCLK_PIN                     (&omv_pin_B13_SPI2)
-#define OMV_SPI2_MISO_PIN                     (&omv_pin_B14_SPI2)
-#define OMV_SPI2_MOSI_PIN                     (&omv_pin_B15_SPI2)
-#define OMV_SPI2_SSEL_PIN                     (&omv_pin_B12_SPI2)
-#define OMV_SPI2_DMA_TX_CHANNEL               (DMA1_Stream4)
-#define OMV_SPI2_DMA_TX_REQUEST               (DMA_REQUEST_SPI2_TX)
-#define OMV_SPI2_DMA_RX_CHANNEL               (DMA1_Stream3)
-#define OMV_SPI2_DMA_RX_REQUEST               (DMA_REQUEST_SPI2_RX)
 
 // SPI bus 3
 #define OMV_SPI3_ID                           (3)
 #define OMV_SPI3_SCLK_PIN                     (&omv_pin_B3_SPI3)
 #define OMV_SPI3_MISO_PIN                     (&omv_pin_B4_SPI3)
 #define OMV_SPI3_MOSI_PIN                     (&omv_pin_B5_SPI3)
-#define OMV_SPI3_SSEL_PIN                     (&omv_pin_A15_SPI3)
+#define OMV_SPI3_SSEL_PIN                     (&omv_pin_I2_GPIO)
 #define OMV_SPI3_DMA_TX_CHANNEL               (DMA1_Stream7)
 #define OMV_SPI3_DMA_TX_REQUEST               (DMA_REQUEST_SPI3_TX)
 #define OMV_SPI3_DMA_RX_CHANNEL               (DMA1_Stream2)
 #define OMV_SPI3_DMA_RX_REQUEST               (DMA_REQUEST_SPI3_RX)
-
-// SPI LCD Interface
-#define OMV_SPI_DISPLAY_CONTROLLER            (OMV_SPI2_ID)
-#define OMV_SPI_DISPLAY_MOSI_PIN              (&omv_pin_B15_SPI2)
-#define OMV_SPI_DISPLAY_MISO_PIN              (&omv_pin_B14_SPI2)
-#define OMV_SPI_DISPLAY_SCLK_PIN              (&omv_pin_B13_SPI2)
-#define OMV_SPI_DISPLAY_SSEL_PIN              (&omv_pin_B12_GPIO)
-
-#define OMV_SPI_DISPLAY_RS_PIN                (&omv_pin_D13_GPIO)
-#define OMV_SPI_DISPLAY_RST_PIN               (&omv_pin_D12_GPIO)
-#define OMV_SPI_DISPLAY_BL_PIN                (&omv_pin_A5_GPIO)
 
 #endif //__BOARD_CONFIG_H__
