@@ -29,10 +29,9 @@
 #include STM32_HAL_H
 #include "port.h"
 
-
 // Misc config.
 #define OMV_BOOT_VID                (0x37C5)
-#define OMV_BOOT_PID                (0x9204)
+#define OMV_BOOT_PID                (0x924A)
 #define OMV_BOOT_DFU_TIMEOUT        (1500)
 #define OMV_BOOT_LED_PIN            (0) // index in omv_boot_pins
 #define OMV_BOOT_MAGIC_ADDR         (0x2001FFFCU)
@@ -42,7 +41,7 @@
 
 // Boot I/O pins.
 static const pin_t omv_boot_pins[] = {
-  { .gpio = GPIOC, .pin = GPIO_PIN_1,  .speed = GPIO_SPEED_LOW,  .mode = GPIO_MODE_OUTPUT_PP, .pull = GPIO_PULLUP  }, // LED
+  { .gpio = GPIOI, .pin = GPIO_PIN_7,  .speed = GPIO_SPEED_LOW,  .mode = GPIO_MODE_OUTPUT_PP, .pull = GPIO_PULLUP  }, // LED
   { .gpio = GPIOA, .pin = GPIO_PIN_9,  .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_INPUT,  .pull = GPIO_NOPULL     }, // VBUS
   { .gpio = GPIOA, .pin = GPIO_PIN_11, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DM
   { .gpio = GPIOA, .pin = GPIO_PIN_12, .speed = GPIO_SPEED_HIGH, .mode = GPIO_MODE_AF_PP, .alt = GPIO_AF10_OTG_FS  }, // DP
