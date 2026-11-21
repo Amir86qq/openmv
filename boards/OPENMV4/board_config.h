@@ -1,10 +1,25 @@
 /*
- * This file is part of the OpenMV project.
+ * SPDX-License-Identifier: MIT
  *
- * Copyright (c) 2013-2024 Ibrahim Abdelkader <iabdalkader@openmv.io>
- * Copyright (c) 2013-2024 Kwabena W. Agyeman <kwagyeman@openmv.io>
+ * Copyright (C) 2013-2024 OpenMV, LLC.
  *
- * This work is licensed under the MIT license, see the file LICENSE for details.
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ * THE SOFTWARE.
  *
  * Board configuration and pin definitions.
  */
@@ -12,13 +27,13 @@
 #define __BOARD_CONFIG_H__
 
 // Architecture info
-#define OMV_BOARD_ARCH                        "OMV4 H7 1024" // 33 chars max
+#define OMV_BOARD_ARCH                        "OMV4 H7 II 1024" // 33 chars max
 #define OMV_BOARD_TYPE                        "H7"
 #define OMV_BOARD_UID_ADDR                    0x1FF1E800    // Unique ID address.
 #define OMV_BOARD_UID_SIZE                    3             // Unique ID size in words.
 #define OMV_BOARD_UID_OFFSET                  4             // Bytes offset for multi-word UIDs.
 
-// JPEG compression settings.
+// JPEG configuration.
 #define OMV_JPEG_CODEC_ENABLE                 (1)
 #define OMV_JPEG_QUALITY_LOW                  (50)
 #define OMV_JPEG_QUALITY_HIGH                 (90)
@@ -29,32 +44,31 @@
 
 // CSI drivers configuration.
 #define OMV_OV2640_ENABLE                     (1)
-
-#define OMV_OV5640_ENABLE                     (0)
-#define OMV_OV5640_AF_ENABLE                  (0)
-#define OMV_OV5640_PLL_CTRL2                  (0x64)
+#define OMV_OV5640_ENABLE                     (1)
+#define OMV_OV5640_AF_ENABLE                  (1)
+#define OMV_OV5640_PLL_CTRL2                  (0x54)
 #define OMV_OV5640_PLL_CTRL3                  (0x13)
 
-#define OMV_OV7725_ENABLE                     (0)
+#define OMV_OV7725_ENABLE                     (1)
 #define OMV_OV7725_PLL_CONFIG                 (0x41) // x4
 #define OMV_OV7725_BANDING                    (0x7F)
 
-#define OMV_MT9V0XX_ENABLE                    (0)
+#define OMV_MT9V0XX_ENABLE                    (1)
 #define OMV_MT9V0XX_FSYNC_PIN                 (&omv_pin_B4_GPIO)
 
-#define OMV_OV9650_ENABLE                     (0)
-#define OMV_MT9M114_ENABLE                    (0)
-#define OMV_LEPTON_ENABLE                     (0)
-#define OMV_PAG7920_ENABLE                    (0)
-#define OMV_PAJ6100_ENABLE                    (0)
-#define OMV_PAJ6100_GLITCH_RECONFIG           (0)
-#define OMV_FROGEYE2020_ENABLE                (0)
+#define OMV_OV9650_ENABLE                     (1)
+#define OMV_MT9M114_ENABLE                    (1)
+#define OMV_LEPTON_ENABLE                     (1)
+#define OMV_PAG7920_ENABLE                    (1)
+#define OMV_PAJ6100_ENABLE                    (1)
+#define OMV_PAJ6100_GLITCH_RECONFIG           (1)
+#define OMV_FROGEYE2020_ENABLE                (1)
 
 // FIR drivers configuration.
-#define OMV_FIR_MLX90621_ENABLE               (0)
-#define OMV_FIR_MLX90640_ENABLE               (0)
-#define OMV_FIR_MLX90641_ENABLE               (0)
-#define OMV_FIR_AMG8833_ENABLE                (0)
+#define OMV_FIR_MLX90621_ENABLE               (1)
+#define OMV_FIR_MLX90640_ENABLE               (1)
+#define OMV_FIR_MLX90641_ENABLE               (1)
+#define OMV_FIR_AMG8833_ENABLE                (1)
 
 // USB IRQn.
 #define OMV_USB_IRQN                          (OTG_FS_IRQn)
@@ -64,7 +78,7 @@
 #define OMV_PROTOCOL_STDIO_BUFFER_SIZE        (512)
 #define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_CRC, HAS_SD)
 
-// PLL1 480MHz/48MHz for USB, SDMMC and FDCAN
+// PLL1 480MHz/48MHz for USB, SDMMC and FDCAN  (HSE = 25MHz)
 #define OMV_OSC_PLL1M                         (5)
 #define OMV_OSC_PLL1N                         (192)
 #define OMV_OSC_PLL1P                         (2)
@@ -74,9 +88,9 @@
 #define OMV_OSC_PLL1VCO                       (RCC_PLL1VCOWIDE)
 #define OMV_OSC_PLL1FRAC                      (0)
 
-// PLL2 - Reserved (SDRAM/FMC and QSPI are not used on this board).
+// PLL2 200MHz for FMC and QSPI  (HSE = 25MHz)
 #define OMV_OSC_PLL2M                         (5)
-#define OMV_OSC_PLL2N                         (80)
+#define OMV_OSC_PLL2N                         (60)
 #define OMV_OSC_PLL2P                         (2)
 #define OMV_OSC_PLL2Q                         (2)
 #define OMV_OSC_PLL2R                         (2)
@@ -84,7 +98,7 @@
 #define OMV_OSC_PLL2VCO                       (RCC_PLL2VCOWIDE)
 #define OMV_OSC_PLL2FRAC                      (0)
 
-// PLL3 160MHz for ADC and SPI123
+// PLL3 160MHz for ADC and SPI123  (HSE = 25MHz)
 #define OMV_OSC_PLL3M                         (5)
 #define OMV_OSC_PLL3N                         (64)
 #define OMV_OSC_PLL3P                         (2)
@@ -140,9 +154,9 @@
 #define OMV_SRAM0_ORIGIN                      0x24000000
 #define OMV_SRAM0_LENGTH                      512K
 #define OMV_SRAM1_ORIGIN                      0x30000000
-#define OMV_SRAM1_LENGTH                      280K // SRAM1 + SRAM2 + upper 24K of SRAM3
+#define OMV_SRAM1_LENGTH                      280K
 #define OMV_SRAM2_ORIGIN                      0x30046000
-#define OMV_SRAM2_LENGTH                      8K   // Last 8K of SRAM3 (DMA)
+#define OMV_SRAM2_LENGTH                      8K
 #define OMV_SRAM4_ORIGIN                      0x38000000
 #define OMV_SRAM4_LENGTH                      64K
 
@@ -154,7 +168,7 @@
 #define OMV_FLASH_TXT_ORIGIN                  0x08040000
 #define OMV_FLASH_TXT_LENGTH                  1664K
 
-// ROMFS configuration (placed in internal flash after firmware).
+// ROMFS configuration.
 #define OMV_ROMFS_PART0_ORIGIN                0x081E0000
 #define OMV_ROMFS_PART0_LENGTH                128K
 
@@ -168,7 +182,7 @@
 #define OMV_AXI_QOS_MDMA_R_PRI                15 // Max pri to move data.
 #define OMV_AXI_QOS_MDMA_W_PRI                15 // Max pri to move data.
 
-// Enable additional GPIO ports.
+// Enable additional GPIO ports (176-pin package uses ports A..I).
 #define OMV_GPIO_PORT_A_ENABLE                (1)
 #define OMV_GPIO_PORT_B_ENABLE                (1)
 #define OMV_GPIO_PORT_C_ENABLE                (1)
