@@ -123,8 +123,8 @@
 #define OMV_DMA_MEMORY_D3                     SRAM4  // Domain 3 DMA buffers.
 #define OMV_GC_BLOCK0_MEMORY                  SRAM1  // Main GC block
 #define OMV_GC_BLOCK0_SIZE                    (232K)
-#define OMV_GC_BLOCK1_MEMORY                  DRAM   // Extra GC block 0.
-#define OMV_GC_BLOCK1_SIZE                    (4M)
+// #define OMV_GC_BLOCK1_MEMORY                  DRAM   // Extra GC block 0.
+// #define OMV_GC_BLOCK1_SIZE                    (4M)
 #define OMV_UMA_BLOCK0_MEMORY                 DRAM   // Default UMA pool.
 #define OMV_UMA_BLOCK0_SIZE                   (27M)
 #define OMV_UMA_BLOCK0_FLAGS                  (UMA_DEFAULT)
