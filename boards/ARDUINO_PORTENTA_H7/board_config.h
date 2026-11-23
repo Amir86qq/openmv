@@ -1,4 +1,4 @@
- /*
+/*
  * SPDX-License-Identifier: MIT
  *
  * Copyright (C) 2013-2024 OpenMV, LLC.
@@ -27,6 +27,7 @@
 #define __BOARD_CONFIG_H__
 
 // Architecture info
+// Note: Kept the PORTENTA name as requested, but updated to 32768 (32MB) SDRAM for your custom board.
 #define OMV_BOARD_ARCH                      "PORTENTA H7 32768 SDRAM"    // 33 chars max
 #define OMV_BOARD_TYPE                      "H7"
 #define OMV_BOARD_UID_ADDR                  0x1FF1E800  // Unique ID address.
@@ -47,23 +48,22 @@
 
 #define OMV_OV5640_ENABLE                   (0)
 #define OMV_OV5640_AF_ENABLE                (0)
+#define OMV_OV5640_CLK_FREQ                 (12000000)
 #define OMV_OV5640_PLL_CTRL2                (0x64)
 #define OMV_OV5640_PLL_CTRL3                (0x13)
 
 #define OMV_OV7725_ENABLE                   (0)
-#define OMV_OV7725_PLL_CONFIG               (0x41) // x4
-#define OMV_OV7725_BANDING                  (0x7F)
-
 #define OMV_MT9V0XX_ENABLE                  (0)
-#define OMV_MT9V0XX_FSYNC_PIN               (&omv_pin_B4_GPIO)
-
 #define OMV_OV9650_ENABLE                   (0)
 #define OMV_MT9M114_ENABLE                  (0)
 #define OMV_LEPTON_ENABLE                   (0)
 #define OMV_PAG7920_ENABLE                  (0)
 #define OMV_PAJ6100_ENABLE                  (0)
-#define OMV_PAJ6100_GLITCH_RECONFIG         (0)
 #define OMV_FROGEYE2020_ENABLE              (0)
+
+// Removed Portenta specific Himax sensors
+#define OMV_HM01B0_ENABLE                   (0)
+#define OMV_HM0360_ENABLE                   (0)
 
 // FIR drivers configuration.
 #define OMV_FIR_MLX90621_ENABLE             (0)
@@ -71,14 +71,20 @@
 #define OMV_FIR_MLX90641_ENABLE             (0)
 #define OMV_FIR_AMG8833_ENABLE              (0)
 
-// USB IRQn.
+// USB IRQn. (Custom board uses FS, Portenta used HS)
 #define OMV_USB_IRQN                        (OTG_FS_IRQn)
 
 // OpenMV protocol configuration.
+// Removed HAS_WIFI, HAS_BT, HAS_ETH since custom board lacks them.
 #define OMV_PROTOCOL_MAX_BUFFER_SIZE        (4096)
-#define OMV_PROTOCOL_HW_CAPS                OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC, HAS_SD)
+#define OMV_PROTOCOL_HW_CAPS                OMV_PROTOCOL_HW_CAPS_MAKE( \
+        HAS_JPEG, HAS_DRAM, HAS_CRC, HAS_SD)
 
-// PLL1 480MHz/48MHz for CPU, USB, SDMMC and FDCAN
+// Defined for cpu frequency scaling to override the revid.
+#define OMV_MAX_CPU_FREQ                    (480)
+
+// PLL1 480MHz for CPU, 48MHz for USB, SDMMC and FDCAN
+// Custom Board HSE = 25MHz
 #define OMV_OSC_PLL1M                       (5)
 #define OMV_OSC_PLL1N                       (192)
 #define OMV_OSC_PLL1P                       (2)
@@ -116,6 +122,7 @@
 #define OMV_OSC_SPI123_CLKSOURCE            RCC_SPI123CLKSOURCE_PLL3
 
 // HSE/HSI/CSI State
+// Changed to HSE_ON because custom board uses a physical 25MHz crystal
 #define OMV_OSC_HSE_STATE                   (RCC_HSE_ON)
 #define OMV_OSC_HSI48_STATE                 (RCC_HSI48_ON)
 
@@ -123,6 +130,7 @@
 #define OMV_FLASH_LATENCY                   (FLASH_LATENCY_2)
 
 // Power supply configuration
+// Custom board uses standard LDO
 #define OMV_PWR_SUPPLY                      (PWR_LDO_SUPPLY)
 
 // Linker script constants (see the linker script template stm32.ld.S).
@@ -164,8 +172,8 @@
 #define OMV_SRAM3_LENGTH                    32K
 #define OMV_SRAM4_ORIGIN                    0x38000000
 #define OMV_SRAM4_LENGTH                    64K
-#define OMV_DRAM_ORIGIN                     0xC0000000
-#define OMV_DRAM_LENGTH                     32M
+#define OMV_DRAM_ORIGIN                     0xC0000000    // Custom board SDRAM Base
+#define OMV_DRAM_LENGTH                     32M           // Custom board SDRAM Size
 
 // Flash configuration.
 #define OMV_FLASH_BOOT_ORIGIN               0x08000000
@@ -174,8 +182,6 @@
 #define OMV_FLASH_FFS_LENGTH                128K
 #define OMV_FLASH_TXT_ORIGIN                0x08040000
 #define OMV_FLASH_TXT_LENGTH                1792K
-#define OMV_FLASH_EXT_ORIGIN                0x90000000
-#define OMV_FLASH_EXT_LENGTH                32M
 
 // ROMFS configuration.
 #define OMV_ROMFS_PART0_ORIGIN              0x91800000
@@ -191,7 +197,7 @@
 #define OMV_AXI_QOS_MDMA_R_PRI              15    // Max pri to move data.
 #define OMV_AXI_QOS_MDMA_W_PRI              15    // Max pri to move data.
 
-// Enable additional GPIO ports.
+// Enable additional GPIO ports. (Removed J and K since custom board doesn't use them).
 #define OMV_GPIO_PORT_A_ENABLE              (1)
 #define OMV_GPIO_PORT_B_ENABLE              (1)
 #define OMV_GPIO_PORT_C_ENABLE              (1)
@@ -202,7 +208,7 @@
 #define OMV_GPIO_PORT_H_ENABLE              (1)
 #define OMV_GPIO_PORT_I_ENABLE              (1)
 
-// CSI I2C
+// CSI I2C bus
 #define OMV_CSI_I2C_ID                      (1)
 #define OMV_CSI_I2C_SPEED                   (OMV_I2C_SPEED_STANDARD)
 
@@ -225,6 +231,7 @@
 #define OMV_CSI_DMA_MEMCPY_ENABLE           (1)
 #define OMV_CSI_HW_CROP_ENABLE              (1)
 
+// Camera pins mapped according to your custom STM32H743II board schematic
 #define OMV_CSI_D0_PIN                      (&omv_pin_C6_DCMI)
 #define OMV_CSI_D1_PIN                      (&omv_pin_C7_DCMI)
 #define OMV_CSI_D2_PIN                      (&omv_pin_C8_DCMI)
@@ -237,11 +244,9 @@
 #define OMV_CSI_HSYNC_PIN                   (&omv_pin_A4_DCMI)
 #define OMV_CSI_VSYNC_PIN                   (&omv_pin_G9_DCMI)
 #define OMV_CSI_PXCLK_PIN                   (&omv_pin_A6_DCMI)
-
 #define OMV_CSI_RESET_PIN                   (&omv_pin_E2_GPIO)
-#define OMV_CSI_RESET_DELAY                 (100)
-
 #define OMV_CSI_POWER_PIN                   (&omv_pin_E3_GPIO)
+#define OMV_CSI_RESET_DELAY                 (100)
 #define OMV_CSI_POWER_DELAY                 (100)
 
 // Physical I2C buses.
@@ -263,7 +268,7 @@
 #define OMV_SPI3_SCLK_PIN                   (&omv_pin_B3_SPI3)
 #define OMV_SPI3_MISO_PIN                   (&omv_pin_B4_SPI3)
 #define OMV_SPI3_MOSI_PIN                   (&omv_pin_B5_SPI3)
-#define OMV_SPI3_SSEL_PIN                   (&omv_pin_I2_GPIO) // CS1 روی PI2
+#define OMV_SPI3_SSEL_PIN                   (&omv_pin_I2_GPIO) // CS1 on PI2
 #define OMV_SPI3_DMA_TX_CHANNEL             (DMA1_Stream7)
 #define OMV_SPI3_DMA_TX_REQUEST             (DMA_REQUEST_SPI3_TX)
 #define OMV_SPI3_DMA_RX_CHANNEL             (DMA1_Stream2)
