@@ -241,15 +241,15 @@
 // Physical SPI buses.
 
 // SPI bus 3
-#define OMV_SPI3_ID                           (3)
-#define OMV_SPI3_SCLK_PIN                     (&omv_pin_B3_SPI3)
-#define OMV_SPI3_MISO_PIN                     (&omv_pin_B4_SPI3)
-#define OMV_SPI3_MOSI_PIN                     (&omv_pin_B5_SPI3)
-#define OMV_SPI3_SSEL_PIN                     (&omv_pin_I2_GPIO) // CS1 روی PI2
-#define OMV_SPI3_DMA_TX_CHANNEL               (DMA1_Stream7)
-#define OMV_SPI3_DMA_TX_REQUEST               (DMA_REQUEST_SPI3_TX)
-#define OMV_SPI3_DMA_RX_CHANNEL               (DMA1_Stream2)
-#define OMV_SPI3_DMA_RX_REQUEST               (DMA_REQUEST_SPI3_RX)
+//#define OMV_SPI3_ID                           (3)
+//#define OMV_SPI3_SCLK_PIN                     (&omv_pin_B3_SPI3)
+//#define OMV_SPI3_MISO_PIN                     (&omv_pin_B4_SPI3)
+//#define OMV_SPI3_MOSI_PIN                     (&omv_pin_B5_SPI3)
+//#define OMV_SPI3_SSEL_PIN                     (&omv_pin_I2_GPIO) // CS1 روی PI2
+//#define OMV_SPI3_DMA_TX_CHANNEL               (DMA1_Stream7)
+//#define OMV_SPI3_DMA_TX_REQUEST               (DMA_REQUEST_SPI3_TX)
+//#define OMV_SPI3_DMA_RX_CHANNEL               (DMA1_Stream2)
+//#define OMV_SPI3_DMA_RX_REQUEST               (DMA_REQUEST_SPI3_RX)
 
 
 #endif //__BOARD_CONFIG_H__
