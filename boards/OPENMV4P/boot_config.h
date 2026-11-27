@@ -32,7 +32,8 @@
 // Misc config.
 #define OMV_BOOT_VID                (0x37C5)
 #define OMV_BOOT_PID                (0x924A)
-#define OMV_BOOT_DFU_TIMEOUT        (1500)
+#define OMV_BOOT_DFU_TIMEOUT        (5000)
+//#define OMV_BOOT_DFU_TIMEOUT        (1500)
 #define OMV_BOOT_LED_PIN            (0) // index in omv_boot_pins
 #define OMV_BOOT_MAGIC_ADDR         (0x2001FFFCU)
 
