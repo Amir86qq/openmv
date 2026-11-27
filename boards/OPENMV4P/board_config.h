@@ -7,7 +7,7 @@
  * This work is licensed under the MIT license, see the file LICENSE for details.
  *
  * Board configuration and pin definitions. 
- */
+ */ 
 #ifndef __BOARD_CONFIG_H__
 #define __BOARD_CONFIG_H__
 
