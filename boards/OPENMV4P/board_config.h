@@ -39,8 +39,8 @@
 #define OMV_OV7725_PLL_CONFIG                 (0x41) // x4
 #define OMV_OV7725_BANDING                    (0x7F)
 
-#define OMV_MT9V0XX_ENABLE                    (0)
-#define OMV_MT9V0XX_FSYNC_PIN                 (&omv_pin_B4_GPIO)
+//#define OMV_MT9V0XX_ENABLE                    (0)
+//#define OMV_MT9V0XX_FSYNC_PIN                 (&omv_pin_B4_GPIO)
 
 #define OMV_OV9650_ENABLE                     (0)
 #define OMV_MT9M114_ENABLE                    (0)
