@@ -62,13 +62,17 @@
 
 // OpenMV protocol configuration.
 #define OMV_PROTOCOL_MAX_BUFFER_SIZE          (4096)
-#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC)
+#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC , HAS_SD)
 //#define OMV_PROTOCOL_HW_CAPS                  OMV_PROTOCOL_HW_CAPS_MAKE(HAS_JPEG, HAS_DRAM, HAS_CRC, HAS_SD)
-//PLL1 48MHz for USB, SDMMC and FDCAN
+
+// Defined for cpu frequency scaling to override the revid.
+#define OMV_MAX_CPU_FREQ                    (400)
+
+//PLL1 400MHz for USB, SDMMC and FDCAN
 #define OMV_OSC_PLL1M                         (5)
-#define OMV_OSC_PLL1N                         (192)
+#define OMV_OSC_PLL1N                         (160)
 #define OMV_OSC_PLL1P                         (2)
-#define OMV_OSC_PLL1Q                         (20)
+#define OMV_OSC_PLL1Q                         (16)
 #define OMV_OSC_PLL1R                         (2)
 #define OMV_OSC_PLL1VCI                       (RCC_PLL1VCIRANGE_2)
 #define OMV_OSC_PLL1VCO                       (RCC_PLL1VCOWIDE)
@@ -86,9 +90,9 @@
 
 // PLL3 160MHz for ADC and SPI123
 #define OMV_OSC_PLL3M                         (5)
-#define OMV_OSC_PLL3N                         (64)
+#define OMV_OSC_PLL3N                         (160)
 #define OMV_OSC_PLL3P                         (2)
-#define OMV_OSC_PLL3Q                         (2)
+#define OMV_OSC_PLL3Q                         (5)
 #define OMV_OSC_PLL3R                         (2)
 #define OMV_OSC_PLL3VCI                       (RCC_PLL3VCIRANGE_2)
 #define OMV_OSC_PLL3VCO                       (RCC_PLL3VCOWIDE)
