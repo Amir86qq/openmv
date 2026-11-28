@@ -6,7 +6,7 @@
  *
  * This work is licensed under the MIT license, see the file LICENSE for details.
  *
- * Image library configuration.
+ * Image library configuration. 
  */
 #ifndef __IMLIB_CONFIG_H__
 #define __IMLIB_CONFIG_H__
